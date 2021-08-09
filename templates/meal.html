@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Szczegóły Dania</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <table>
+        <thead>
+            <th>Nazwa</th>
+            <th>Forma</th>
+            <th>Mięso</th>
+            <th>Dodatek 1</th>
+            <th>Dodatek 2</th>
+            <th>Sos</th>
+            <th>Cena</th>
+        </thead>
+        <tr>
+            <td>{{ meal.article }}</td>
+            <td>{{ meal.form }}</td>
+            <td>{{ meal.meat }}</td>
+            <td>{{ meal.salad1 }}</td>
+            <td>{{ meal.salad2 }}</td>
+            <td>{{ meal.sauce }}</td>
+            <td>{{ meal.price }}</td>
+        </tr>
+    </table>
+
+    
+    <h2> Zmień: </h2>
+    <form method="POST" action="/menu/{{ meal_id }}/">
+        {{ form.hidden_tag() }}
+        <table>
+            {% for field in form if field.widget.input_type != 'hidden' %}
+            <tr>
+                <th>{{ field.label }} {% if field.flags.required %}*{% endif %}</th>
+                <td>{{ field }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Zmień">
+        </form>
+
+
+
+</body>
+
+</html>

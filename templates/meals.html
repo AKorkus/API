@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Comida Rapida Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<h2>Menu</h2>
+
+<table>
+    <thead>
+        <th>Nazwa</th>
+        <th>Forma</th>
+        <th>Mięso</th>
+        <th>Dodatek 1</th>
+        <th>Dodatek 2</th>
+        <th>Sos</th>
+        <th>Cena</th>
+    </thead>
+    {% for meal in meals %}
+    <tr>
+        <td><a href="/menu/{{ loop.index }}">{{ meal.article }}</a></td>
+        
+        <td>{{ meal.form }}</td>
+        <td>{{ meal.meat }}</td>
+        <td>{{ meal.salad1 }}</td>
+        <td>{{ meal.salad2 }}</td>
+        <td>{{ meal.sauce }}</td>
+        <td>{{ meal.price }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<div>
+    <h2> Dodaj nową pozycję: </h2>
+    <form method="POST" action="/menu/">
+        {{ form.hidden_tag() }}
+        <table>
+            {% for field in form if field.widget.input_type != 'hidden' %}
+            <tr>
+                <th>{{ field.label }} {% if field.flags.required %}*{% endif %}</th>
+                <td>{{ field }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Dodaj">
+    </form>
+</div>
+</body>
+
+</html>

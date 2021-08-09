@@ -1,0 +1,16 @@
+body {
+  background-color: beige;
+}
+
+table,
+th,
+tr,
+td {
+  border: 1px solid black;
+  margin: 1px;
+  padding: 2px;
+}
+
+.AlbumCover {
+  width: 20%;
+}
